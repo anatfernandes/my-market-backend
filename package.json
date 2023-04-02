@@ -1,0 +1,32 @@
+{
+	"name": "my-market",
+	"version": "1.0.0",
+	"description": "Api para um mercado online.",
+	"main": "./src/app.js",
+	"type": "module",
+	"scripts": {
+		"start": "node ./src/app.js",
+		"dev": "npx nodemon ./src/app.js",
+		"test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --passWithNoTests --runInBand",
+		"test:watch": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --watchAll --passWithNoTests --runInBand",
+		"coverage": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'"
+	},
+	"author": "Ana Fernandes",
+	"license": "ISC",
+	"keywords": [
+		"mercado",
+		"back-end",
+		"nodejs",
+		"express"
+	],
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"http-status": "^1.6.2",
+		"mongodb": "^5.1.0"
+	},
+	"devDependencies": {
+		"jest": "^29.5.0"
+	}
+}
