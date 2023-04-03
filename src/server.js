@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { responseHelper } from "./helpers/index.js";
-import { productsRoute } from "./routes/index.js";
+import { productsRoute, categoriesRoute } from "./routes/index.js";
 
 const server = express();
 
@@ -11,6 +11,7 @@ server
 	.get("/health", (req, res) =>
 		responseHelper.OK({ res, body: "It is alive!!!" })
 	)
-	.use("/api", productsRoute);
+	.use("/api/products", productsRoute)
+	.use("/api/categories", categoriesRoute);
 
 export { server };
