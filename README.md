@@ -13,8 +13,6 @@
 
 ## Sobre
 API de supermercado, uma solução prática e eficiente para quem deseja ter acesso rápido e fácil a categorias, que vão desde produtos de limpeza até alimentos e bebidas, e a diversos produtos disponíveis no mercado.
-<br/>
-Está em busca de inspiração para novas receitas ou deseja explorar novos produtos e marcas? Visite o endpoint de produtos!
 
 <br/>
 
@@ -131,4 +129,8 @@ Está em busca de inspiração para novas receitas ou deseja explorar novos prod
 > npm run test:watch
 >```
 
+8. [*Opcional*] Acompanhe a cobertura dos testes:
+>```bash
+> npm run coverage
+>```
 
