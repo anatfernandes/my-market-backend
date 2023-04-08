@@ -4,8 +4,13 @@ import { MONGO_COLLECTIONS_ENUM } from "../enums/index.js";
 
 const db = await mongo();
 
-function findAll() {
-	return db.collection(MONGO_COLLECTIONS_ENUM.PRODUCTS).find().toArray();
+function findAll({ start, nPerPage }) {
+	return db
+		.collection(MONGO_COLLECTIONS_ENUM.PRODUCTS)
+		.find()
+		.skip(start)
+		.limit(nPerPage)
+		.toArray();
 }
 
 function findById(id) {
