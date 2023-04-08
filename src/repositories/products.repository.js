@@ -6,7 +6,7 @@ const db = await mongo();
 
 function findAll({
 	page: { start, nPerPage },
-	filter: { name, minPrice, maxPrice },
+	filter: { name, minPrice, maxPrice, promotion },
 }) {
 	return db
 		.collection(MONGO_COLLECTIONS_ENUM.PRODUCTS)
@@ -18,6 +18,9 @@ function findAll({
 						{ originalPrice: { $gte: minPrice, $lte: maxPrice } },
 						{ promotionPrice: { $gte: minPrice, $lte: maxPrice } },
 					],
+				},
+				{
+					isPromotion: { $in: promotion },
 				},
 			],
 		})

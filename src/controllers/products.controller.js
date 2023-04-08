@@ -8,6 +8,7 @@ async function listAll(req, res) {
 		name = "",
 		minPrice = 0,
 		maxPrice = Number.POSITIVE_INFINITY,
+		promotion = "any",
 	} = req.query;
 
 	if (isInvalidPage(page)) {
@@ -23,6 +24,7 @@ async function listAll(req, res) {
 			name,
 			minPrice: Number(minPrice),
 			maxPrice: Number(maxPrice),
+			promotion,
 		});
 
 		return responseHelper.OK({ res, body: products });
