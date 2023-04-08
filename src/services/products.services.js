@@ -1,7 +1,7 @@
 import { productsRepository } from "../repositories/products.repository.js";
 import { categoriesRepository } from "../repositories/categories.repository.js";
 
-async function listAll({ page, name }) {
+async function listAll({ page, name, minPrice, maxPrice }) {
 	const products = await productsRepository.findAll({
 		page: {
 			start: (page - 1) * 10,
@@ -9,7 +9,9 @@ async function listAll({ page, name }) {
 		},
 		filter: {
 			name,
-		}
+			minPrice,
+			maxPrice,
+		},
 	});
 
 	const formattedProducts = products.map(
@@ -32,6 +34,13 @@ async function findById(id) {
 	const formattedProduct = { ...product, categoryName: category.name };
 
 	return formattedProduct;
+}
+
+function getPromotionValue(promotion) {
+	if (promotion === "true") return promotion;
+	if (promotion === "false") return promotion;
+
+	return "";
 }
 
 const productsService = { listAll, findById };

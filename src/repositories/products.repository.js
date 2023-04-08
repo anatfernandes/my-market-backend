@@ -4,11 +4,22 @@ import { MONGO_COLLECTIONS_ENUM } from "../enums/index.js";
 
 const db = await mongo();
 
-function findAll({ page: { start, nPerPage }, filter: { name } }) {
+function findAll({
+	page: { start, nPerPage },
+	filter: { name, minPrice, maxPrice },
+}) {
 	return db
 		.collection(MONGO_COLLECTIONS_ENUM.PRODUCTS)
 		.find({
-			name: { $regex: name, $options: "i" },
+			$and: [
+				{ name: { $regex: name, $options: "i" } },
+				{
+					$or: [
+						{ originalPrice: { $gte: minPrice, $lte: maxPrice } },
+						{ promotionPrice: { $gte: minPrice, $lte: maxPrice } },
+					],
+				},
+			],
 		})
 		.skip(start)
 		.limit(nPerPage)
