@@ -4,10 +4,12 @@ import { MONGO_COLLECTIONS_ENUM } from "../enums/index.js";
 
 const db = await mongo();
 
-function findAll({ start, nPerPage }) {
+function findAll({ page: { start, nPerPage }, filter: { name } }) {
 	return db
 		.collection(MONGO_COLLECTIONS_ENUM.PRODUCTS)
-		.find()
+		.find({
+			name: { $regex: name, $options: "i" },
+		})
 		.skip(start)
 		.limit(nPerPage)
 		.toArray();

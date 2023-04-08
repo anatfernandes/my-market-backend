@@ -4,6 +4,7 @@ import { productsService } from "../services/products.services.js";
 
 async function listAll(req, res) {
 	const page = parseInt(req.query.page);
+	const { name = "" } = req.query;
 
 	if (isInvalidPage(page)) {
 		return responseHelper.BAD_REQUEST({
@@ -13,7 +14,7 @@ async function listAll(req, res) {
 	}
 
 	try {
-		const products = await productsService.listAll(page);
+		const products = await productsService.listAll({ page, name });
 		return responseHelper.OK({ res, body: products });
 	} catch (error) {
 		return responseHelper.SERVER_ERROR({ res });

@@ -1,10 +1,15 @@
 import { productsRepository } from "../repositories/products.repository.js";
 import { categoriesRepository } from "../repositories/categories.repository.js";
 
-async function listAll(page) {
+async function listAll({ page, name }) {
 	const products = await productsRepository.findAll({
-		start: (page - 1) * 10,
-		nPerPage: 10,
+		page: {
+			start: (page - 1) * 10,
+			nPerPage: 10,
+		},
+		filter: {
+			name,
+		}
 	});
 
 	const formattedProducts = products.map(
