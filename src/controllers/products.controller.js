@@ -4,12 +4,7 @@ import { productsService } from "../services/products.services.js";
 
 async function listAll(req, res) {
 	const page = parseInt(req.query.page);
-	const {
-		name = "",
-		minPrice = 0,
-		maxPrice = Number.POSITIVE_INFINITY,
-		promotion = "any",
-	} = req.query;
+	const params = getQuery(req);
 
 	if (isInvalidPage(page)) {
 		return responseHelper.BAD_REQUEST({
@@ -19,14 +14,7 @@ async function listAll(req, res) {
 	}
 
 	try {
-		const products = await productsService.listAll({
-			page,
-			name,
-			minPrice: Number(minPrice),
-			maxPrice: Number(maxPrice),
-			promotion,
-		});
-
+		const products = await productsService.listAll({ page, ...params });
 		return responseHelper.OK({ res, body: products });
 	} catch (error) {
 		return responseHelper.SERVER_ERROR({ res });
@@ -62,6 +50,30 @@ async function findById(req, res) {
 
 function isInvalidPage(page) {
 	return isNaN(page) || page < 1;
+}
+
+function getQuery(req) {
+	let {
+		name = "",
+		minPrice = 0,
+		maxPrice = Number.POSITIVE_INFINITY,
+		promotion = "any",
+		categoryId = "",
+	} = req.query;
+
+	try {
+		categoryId = new ObjectId(categoryId);
+	} catch (error) {
+		categoryId = "";
+	}
+
+	return {
+		name,
+		minPrice: Number(minPrice),
+		maxPrice: Number(maxPrice),
+		promotion,
+		categoryId,
+	};
 }
 
 const productsController = { listAll, findById };

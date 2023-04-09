@@ -29,12 +29,38 @@ function findAll({
 		.toArray();
 }
 
+function findAllByCategoryId({
+	page: { start, nPerPage },
+	filter: { name, minPrice, maxPrice, promotion, categoryId },
+}) {
+	return db
+		.collection(MONGO_COLLECTIONS_ENUM.PRODUCTS)
+		.find({
+			$and: [
+				{ name: { $regex: name, $options: "i" } },
+				{
+					$or: [
+						{ originalPrice: { $gte: minPrice, $lte: maxPrice } },
+						{ promotionPrice: { $gte: minPrice, $lte: maxPrice } },
+					],
+				},
+				{
+					isPromotion: { $in: promotion },
+				},
+				{ categoryId },
+			],
+		})
+		.skip(start)
+		.limit(nPerPage)
+		.toArray();
+}
+
 function findById(id) {
 	return db
 		.collection(MONGO_COLLECTIONS_ENUM.PRODUCTS)
 		.findOne({ _id: new ObjectId(id) });
 }
 
-const productsRepository = { findAll, findById };
+const productsRepository = { findAll, findAllByCategoryId, findById };
 
 export { productsRepository };
