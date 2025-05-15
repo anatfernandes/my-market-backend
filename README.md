@@ -1,5 +1,7 @@
 # :shopping_cart: My Market API
 
+![Badge Finalizado](https://img.shields.io/static/v1?label=STATUS&message=FINALIZADO&color=success&style=for-the-badge)
+
 ## Índice
 
 - [Sobre](#Sobre)
@@ -115,7 +117,7 @@ API de supermercado, uma solução prática e eficiente para quem deseja ter ace
 1. Clone esse repositório:
 
    > ```bash
-   > git clone https://github.com/AnaLTFernandes/my-market-backend.git
+   > git clone https://github.com/anatfernandes/my-market-backend.git
    > ```
 
 2. Na raiz do projeto, instale as dependências:
@@ -134,7 +136,7 @@ API de supermercado, uma solução prática e eficiente para quem deseja ter ace
 
 5. Divirta-se nas rotas usando de URL base: `http://localhost:{ENV_PORT}`
 
-6. [*Opcional*] Instale e configure o [frontend](https://github.com/AnaLTFernandes/my-market-frontend)
+6. [*Opcional*] Instale e configure o [frontend](https://github.com/anatfernandes/my-market-frontend)
 
 7. [*Opcional*] Rode os testes:
 
