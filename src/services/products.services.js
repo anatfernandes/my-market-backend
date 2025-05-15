@@ -1,9 +1,11 @@
-import { ObjectId } from "mongodb";
 import { productsRepository } from "../repositories/products.repository.js";
 import { categoriesRepository } from "../repositories/categories.repository.js";
 
-async function listAll() {
-	const products = await productsRepository.findAll();
+async function listAll(page) {
+	const products = await productsRepository.findAll({
+		start: (page - 1) * 10,
+		nPerPage: 10,
+	});
 
 	const formattedProducts = products.map(
 		({ description, originalPrice, promotionPrice, ...product }) => ({
