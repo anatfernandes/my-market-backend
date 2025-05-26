@@ -68,6 +68,17 @@ API de supermercado, uma solução prática e eficiente para quem deseja ter ace
   ]
   ```
 
+- Parâmetros:
+
+  | nome         | tipo    | obrigatório | exemplo                  | descrição                                                                                                     |
+  | ------------ | ------- | ----------- | ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+  | `page`       | number  | **sim**     | 1                        | número da página corrente de produtos                                                                         |
+  | `name`       | string  | não         | manteiga                 | filtra os produtos por uma parte do nome (insensitive case)                                                   |
+  | `categoryId` | string  | não         | 6432f919503d8424c9609279 | filtra os produtos pelo id da categoria                                                                       |
+  | `promotion`  | boolean | não         | true                     | se _true_, retorna somente os produtos em promoção, se _false_, retorna os produtos que não estão em promoção |
+  | `minPrice`   | number  | não         | 1200                     | preço mínimo que os produtos retornados devem ter                                                             |
+  | `maxPrice`   | number  | não         | 2000                     | preço máximo que os produtos retornados devem ter                                                             |
+
 - Possíveis erros:
 
   | status code | motivo                                                                   |
